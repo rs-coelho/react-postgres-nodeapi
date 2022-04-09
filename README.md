@@ -13,8 +13,8 @@ This will install the dependencies of this project
 This project requires was made with a postgres database but will work with other depending on which Databases Sequelize lib accepts.\
 Please look at db/db.config.js to change the required parameters. 
 \
-Although the script_postgres.sql contains the necessary query to create the table use in this project it is not necessary to run it.\
-That is because of  the line 205 in api.js that checks if the tables were created and if not it creats them.
+Although the script_postgres.sql contains the necessary query to create the table used in this project it is not necessary to run it.\
+That is because of  the line 205 in api.js that checks if the tables were created and if not it creats them, but it is necessary to create a database before running this project.
 
 ### `npm run api`
 
