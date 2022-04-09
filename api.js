@@ -150,30 +150,36 @@ api.get("/get", async (req,res)=>{
 // Update ok
 api.put("/update", async (req,res)=>{
     try{
-        let cadastro = await Cadastro.findByPk(req.body.cpf_cnpj,{attributes: ['cpf_cnpj', 'nome']});
+        let cadastro = await Cadastro.findByPk(req.body.codPessoa);
     
         if(!cadastro){
             res.status(404).json({
-                message: "Not Found for updating a Cadastro with CPF_CNPJ = " + req.body.cpf_cnpj,
+                message: "Not Found for updating a Cadastro with codPessoa = " + req.body.codPessoa,
                 error: "404"
             });
         } else {    
             // update new change to database
             let updatedObject = {
-                nome: req.body.nome,
-                senha: encode(req.body.senha)
+                nome : req.body.nome,
+                telefone : req.body.telefone,
+                login : req.body.login,
+                cpf : req.body.cpf,
+                rg : req.body.rg,
+                cnpj : req.body.cnpj,
+                inscricaoEstadual : req.body.inscricaoEstadual,
+                senhaEncriptada : encode(req.body.senha),
             }
-            let result = await Cadastro.update(updatedObject,{where: {cpf_cnpj: req.body.cpf_cnpj}});
+            let result = await Cadastro.update(updatedObject,{where: {codPessoa: req.body.codPessoa}});
 
             if(!result) {
                 res.status(500).json({
-                    message: "Error -> Can not update a Cadastro with cpf_cnpj = " + req.body.cpf_cnpj,
+                    message: "Error -> Can not update a Cadastro with CodPessoa = " + req.body.codPessoa,
                     error: "Can NOT Updated",
                 });
             }
 
             res.status(200).json({
-                message:"Cadastro with CPF_CNPJ = "+req.body.cpf_cnpj+" was updated"
+                message:"Cadastro with CodPessoa = "+req.body.codPessoa+" was updated"
             });
         }
         

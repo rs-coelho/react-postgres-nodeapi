@@ -25,9 +25,16 @@ function CreateForm({Create,s, error}) {
         <div className="inner-form">
             <h2>{s}</h2>
             {(error !== "")?(<div className="error">{error}</div>): ""}
+            
 
             <button type='button' className={colorF} onClick={()=>{setFisJur('fis');changeColors(fis_jus)}}>Pessoa Fisica</button>
             <button type='button' className={colorJ} onClick={()=>{setFisJur('jur');changeColors(fis_jus)}}>Pessoa Juridica</button>
+            {(s === "Update")?(
+            <div className="form-group">
+                <label htmlFor='codPessoa'>CodPessoa:</label>
+                <input type="text" name='codPessoa' id='codPessoa' onChange={e=>setDetails({...details,codPessoa: e.target.value})} value={details.codPessoa}/>
+            </div>
+            ): ""}
             <div className="form-group">
                 <label htmlFor='nome'>Nome:</label>
                 <input type="text" name='nome' id='nome' onChange={e=>setDetails({...details,nome: e.target.value})} value={details.nome}/>
