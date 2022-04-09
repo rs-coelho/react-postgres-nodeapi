@@ -78,27 +78,27 @@ api.post("/create",async (req,res)=>{
     
 
     try{
-        if((req.body.cpf_cnpj.length===11 || req.body.cpf_cnpj.length===14) && typeof Number(req.body.cpf_cnpj)==="number"){
         // Building Cadastro object from upoading request's body
-        cadastro.cpf_cnpj = req.body.cpf_cnpj;
         cadastro.nome = req.body.nome;
-        cadastro.senha = encode(req.body.senha);
+        cadastro.telefone = req.body.telefone;
+        cadastro.login = req.body.login;
+        cadastro.cpf = req.body.cpf;
+        cadastro.rg = req.body.rg;
+        cadastro.cnpj = req.body.cnpj;
+        cadastro.inscricaoEstadual = req.body.inscricaoEstadual;
+        cadastro.senhaEncriptada = encode(req.body.senha);
     
         // Save to Postgres database
         await Cadastro.create(cadastro, 
-                          {attributes: ['cpf_cnpj', 'nome']})
+                          {attributes: ['nome','login','telefone']})
                     .then(result => {    
                       res.status(200).json({
                           message:'Cadastro Created',
-                        'cpf_cnpj' : req.body.cpf_cnpj,
+                        'login' : req.body.login,
+                        'telefone' : req.body.telefone,
                         'nome': req.body.nome
                       });
                     });
-        }else {
-            res.status(400).json({
-                message: "Invalid CPF | CNPJ"
-            });
-        }
     }catch(error){
         res.status(500).json({
             message: "This CPF | CNPJ already exists",
@@ -111,9 +111,10 @@ api.post("/create",async (req,res)=>{
 });
 
 // Read Full List ok
-api.get("/get/all", async (req,res)=>{
+api.get("/list", async (req,res)=>{
     try{
-        await Cadastro.findAll({attributes: ['cpf_cnpj', 'nome']})
+        
+        await Cadastro.findAll({attributes: ['codPessoa','nome','telefone','login','cpf','rg','cnpj','inscricaoEstadual']})
         .then(cadastro => {
             res.status(200).json(cadastro);
         })
@@ -128,7 +129,7 @@ api.get("/get/all", async (req,res)=>{
 // Read 1 item ok
 api.get("/get", async (req,res)=>{
     try{
-        let cadastro = await Cadastro.findByPk(req.body.cpf_cnpj,{attributes: ['cpf_cnpj', 'nome']})
+        let cadastro = await Cadastro.findByPk(req.body.cpf_cnpj,{attributes: ['codPessoa','nome','telefone','login','cpf','rg','cnpj','inscricaoEstadual']})
         if(!cadastro){
             res.status(404).json({
                 message: "Not Found for updating a Cadastro with CPF_CNPJ = " + req.body.cpf_cnpj,
@@ -187,16 +188,16 @@ api.put("/update", async (req,res)=>{
 // Delete ok
 api.delete("/delete",async(req,res)=>{
     try{
-        let cadastro = await Cadastro.findByPk(req.body.cpf_cnpj)
+        let cadastro = await Cadastro.findByPk(req.body.codPessoa)
         if(!cadastro){
             res.status(404).json({
-                message: "Does Not exist a Cadastro with CPF_CNPJ = " + req.body.cpf_cnpj,
+                message: "Does Not exist a Cadastro with codPessoa = " + req.body.codPessoa,
                 error: "404",
             });
         } else {
             await cadastro.destroy();
             res.status(200).json({
-                message: "Cadastro with CPF_CNPJ = "+req.body.cpf_cnpj+" was deleted",
+                message: "Cadastro with codPessoa = "+req.body.codPessoa+" was deleted",
             });
         }
     }catch(error) {

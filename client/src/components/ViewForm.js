@@ -6,13 +6,13 @@ const ViewForm = () =>{
     const [data,setData] = useState([]);
 
     useEffect(()=>{
-        getAllCadastro();
+        getListCadastro();
     },[]);
 
 
 
-const getAllCadastro = async () =>{
-      await axios.get('get/all').then((result)=>{
+const getListCadastro = async () =>{
+      await axios.get('list').then((result)=>{
           setData(result.data);
         // console.log("output:" + JSON.stringify(result.data));
      })
@@ -24,7 +24,7 @@ const cadastroDelete = async (details)=>{
       }
     if(window.confirm("Are you sure you want to delete this Cadastro?")){
         await axios.delete('http://localhost:3333/delete',{headers:myheaders,data:JSON.stringify(details)}).then((result)=>{
-            getAllCadastro();
+            getListCadastro();
           console.log("output:" + JSON.stringify(result.data));
        })
     }
@@ -37,8 +37,14 @@ const cadastroDelete = async (details)=>{
         <table className='sytled-table'>
             <thead>
                 <tr>
-                    <th style={{textAlign:"center"}}>CPF|CNPJ</th>
+                    <th style={{textAlign:"center"}}>CodPessoa</th>
                     <th style={{textAlign:"center"}}>Nome</th>
+                    <th style={{textAlign:"center"}}>Telefone</th>
+                    <th style={{textAlign:"center"}}>Login</th>
+                    <th style={{textAlign:"center"}}>CPF</th>
+                    <th style={{textAlign:"center"}}>RG</th>
+                    <th style={{textAlign:"center"}}>CNPJ</th>
+                    <th style={{textAlign:"center"}}>Inscricao Estadual</th>
                     <th style={{textAlign:"center"}}>Action</th>
                     <th style={{textAlign:"center"}}></th>
 
@@ -48,8 +54,14 @@ const cadastroDelete = async (details)=>{
                 {data && data.map((item,index)=>{
                     return(
                         <tr key={index}>
-                            <td>{item.cpf_cnpj}</td>
+                            <td>{item.codPessoa}</td>
                             <td>{item.nome}</td>
+                            <td>{item.telefone}</td>
+                            <td>{item.login}</td>
+                            <td>{item.cpf}</td>
+                            <td>{item.rg}</td>
+                            <td>{item.cnpj}</td>
+                            <td>{item.inscricaoEstadual}</td>
                             <td>
                                 {/* <button className='btn-edit'>Edit</button> */}
                                 

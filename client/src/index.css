@@ -124,3 +124,7 @@ div .sytled-table tbody tr td{
   padding: 7px;
   background-color: #ffffff9a;
 }
+
+.selected{
+  background: #ffffff;
+}
