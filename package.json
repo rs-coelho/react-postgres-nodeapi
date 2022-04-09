@@ -1,0 +1,22 @@
+{
+    "name": "react",
+    "version": "1.0.0",
+    "description": "CRUD para cadastro de CPF e CNPJ",
+    "main": "index.js",
+    "scripts": {
+        "client": "cd client && npm start",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "api": "concurrently --kill-others-on-fail \"nodemon api.js\" \"npm run client\""
+    },
+    "author": "rs-coelho",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.26.1",
+        "body-parser": "^1.20.0",
+        "concurrently": "^7.1.0",
+        "express": "^4.17.3",
+        "nodemon": "^2.0.15",
+        "pg": "^8.7.3",
+        "sequelize": "^6.18.0"
+    }
+}
