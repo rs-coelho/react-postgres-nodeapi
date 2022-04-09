@@ -27,11 +27,11 @@ You may also see any lint errors in the console.
 
 ### API Routes
 
-- ['GET'] http://localhost:3333/get |body:{'cpf_cnpj':'12345678901'}
-- ['GET'] http://localhost:3333/get/all |body:{'cpf_cnpj':'12345678901'}
-- ['POST'] http://localhost:3333/create |body:{'cpf_cnpj':'12345678901','nome':'NOME TESTE','senha':'senhateste'}
-- ['PUT'] http://localhost:3333/update |body:{'cpf_cnpj':'12345678901','nome':'NOME TESTE','senha':'senhateste'}
-- ['DELETE'] http://localhost:3333/delete |body:{'cpf_cnpj':'12345678901'}
+- ['GET'] http://localhost:3333/get |body:{'codPessoa':'12345678901'}
+- ['GET'] http://localhost:3333/list |body:{'codPessoa':'12345678901'}
+- ['POST'] http://localhost:3333/create |body:{'codPessoa':'12345678901','nome':'NOME TESTE','senha':'senhateste',"telefone": 12333, "login": "rd2", "cpf": 99,"rg": 12, "cnpj": null, "inscricaoEstadual": null}
+- ['PUT'] http://localhost:3333/update |body:{'codPessoa':'12345678901','nome':'NOME TESTE','senha':'senhateste',"telefone": 12333, "login": "rd2", "cpf": 99,"rg": 12, "cnpj": null, "inscricaoEstadual": null}
+- ['DELETE'] http://localhost:3333/delete |body:{'codPessoa':'12345678901'}
 
 
 <!-- ### `npm test`
